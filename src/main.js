@@ -5,12 +5,11 @@ import App from './App'
 import ElementUI from 'element-ui'
 import 'element-ui/lib/theme-chalk/index.css'
 import VueRouter from 'vue-router'
+import Login from './components/Login.vue'
+import TodoList from './components/TodoList.vue'
 
 Vue.use(ElementUI)
 Vue.use(VueRouter)
-
-import Login from './components/Login.vue'
-import TodoList from './components/TodoList.vue'
 
 const router = new VueRouter({
   mode: 'history',
@@ -31,8 +30,9 @@ const router = new VueRouter({
   ]
 })
 
-
 /* eslint-disable no-new */
+/* eslint-disable */
+ // eslint-disable-next-line
 const app = new Vue({
   router: router,
   render: h => h(App)

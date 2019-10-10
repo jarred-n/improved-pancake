@@ -10,7 +10,7 @@
           <el-col :xs="24">
             <template v-if="!Done"> <!--v-if和v-for不能同时在一个元素内使用，因为Vue总会先执行v-for-->
               <template v-for="(item, index) in list">
-                <div class="todo-list" v-if="item.status == false">
+                <div class="todo-list" v-if="item.status === false" :key="index">
                   <span class="item">
                     {{ index + 1 }}. {{ item.content }}
                   </span>
@@ -28,8 +28,8 @@
         </el-tab-pane>
         <el-tab-pane label="已完成事项" name="second">
           <template v-if="count > 0">
-            <template v-for="(item, index) in list">
-              <div class="todo-list" v-if="item.status == true">
+            <template v-for="(item, index) in list" >
+              <div class="todo-list" v-if="item.status === true" :key="index">
                 <span class="item finished">
                   {{ index + 1 }}. {{ item.content }}
                 </span>
@@ -55,60 +55,63 @@ export default {
       name: 'Molunerfinn',
       todos: '',
       activeName: 'first',
-      list:[],
+      list: [],
       count: 0
-    };
+    }
   },
   computed: { // 计算属性用于计算是否已经完成了所有任务
-    Done(){
-      let count = 0;
-      let length = this.list.length;
-      for(let i in this.list){
-        this.list[i].status == true ? count += 1 : '';
+    set: () => {
+      let count = 0
+      let length = this.list.length
+      for (let i in this.list) {
+        if (this.list[i].status === true) {
+          count += 1
+        }
       }
-      this.count = count;
-      if(count == length || length == 0){
+      this.count = count
+      if (count === length || length === 0) {
         return true
-      }else{
+      } else {
         return false
       }
     }
   },
 
   methods: {
-    addTodos() {
-      if(this.todos == '')
+    addTodos () {
+      if (this.todos === '') {
         return
+      }
       let obj = {
         status: false,
         content: this.todos
       }
-      this.list.push(obj);
-      this.todos = '';
+      this.list.push(obj)
+      this.todos = ''
     },
-    finished(index) {
-      this.$set(this.list[index],'status',true) // 通过set的方法让数组的变动能够让Vue检测到
+    finished (index) {
+      this.$set(this.list[index], 'status', true) // 通过set的方法让数组的变动能够让Vue检测到
       this.$message({
         type: 'success',
         message: '任务完成'
       })
     },
-    remove(index) {
-      this.list.splice(index,1);
+    remove (index) {
+      this.list.splice(index, 1)
       this.$message({
         type: 'info',
         message: '任务删除'
       })
     },
-    restore(index) {
-      this.$set(this.list[index],'status',false)
+    restore (index) {
+      this.$set(this.list[index], 'status', false)
       this.$message({
         type: 'info',
         message: '任务还原'
       })
     }
   }
-};
+}
 </script>
 
 <style lang="stylus" scoped>

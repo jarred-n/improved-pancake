@@ -32,10 +32,10 @@ export default {
     }
   },
   methods: {
-    loginToDo() {
+    loginToDo () {
       this.$router.push('/todolist')
     }
-  },
+  }
 }
 </script>
 
