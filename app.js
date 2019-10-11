@@ -18,6 +18,10 @@ app.on('error', function(err, ctx){
   console.log('server error', err);
 });
 
+koa.use('/auth', auth.routes()); // 挂载到koa-router上，同时会让所有的auth的请求路径前面加上'/auth'的请求路径
+
+app.use(koa.routes()); // 将路由规则挂载到koa上
+
 app.listen(8889, ()=> {
   console.log('Koa is listening in 8889');
 });
