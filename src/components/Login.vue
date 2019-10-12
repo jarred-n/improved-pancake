@@ -33,7 +33,15 @@ export default {
   },
   methods: {
     loginToDo () {
-      this.$router.push('/todolist')
+      let obj = {
+        name: this.account,
+        password: this.password
+      }
+      this.$http.post('/auth/user', obj).then((res) => { //调用登录接口
+        if(res.data.success) {  // 成功
+          sessionStorage.setItem('demo-token', res.data.token)
+        }
+      })
     }
   }
 }

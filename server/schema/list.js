@@ -1,4 +1,4 @@
-// list.js
+/* jshint indent: 2 */
 
 module.exports = function(sequelize, DataTypes) {
   return sequelize.define('list', {
@@ -10,15 +10,15 @@ module.exports = function(sequelize, DataTypes) {
     },
     user_id: {
       type: DataTypes.INTEGER(11),
-      allowNull: false
+      allowNull: true
     },
     content: {
       type: DataTypes.CHAR(255),
-      allowNull: false
+      allowNull: true
     },
     status: {
       type: DataTypes.INTEGER(1),
-      allowNull: false
+      allowNull: true
     }
   }, {
     tableName: 'list'

@@ -7,9 +7,11 @@ import 'element-ui/lib/theme-chalk/index.css'
 import VueRouter from 'vue-router'
 import Login from './components/Login.vue'
 import TodoList from './components/TodoList.vue'
+import Axios from 'axios'
 
 Vue.use(ElementUI)
 Vue.use(VueRouter)
+Vue.prototype.$http = Axios // 类似于vue-resource的调用方法，之后可以在实例里直接用this.$http.get()
 
 const router = new VueRouter({
   mode: 'history',
